@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="NYC's Tough Times Lunch Specials: lunch deals under $15 across Manhattan, Brooklyn and Queens.">
+<title>NYC's Tough Times Lunch Specials</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+/* Layout: 2001 dot-com portal chrome (logo bar, beveled toolbar, gel buttons) wrapped around a showreceipts-style flat-lay map of borough cut-outs, with the Digest-O-Tron machine docked to the right */
+:root{
+  --paper:#f5f3ed; --paper-2:#ebe7dc; --ink:#1d1b17; --muted:#6c675c;
+  --navy:#14286b; --navy-2:#2d4fb3; --orange:#ff7a1a; --orange-2:#ffb347; --silver:#d9dce3; --silver-dk:#8a909c;
+  --tray:#1f4fd1; --board:#c9ecd8; --skin:#f1c6a2; --cav:#8e1427; --cav-2:#c2283f;
+  --mn:#d7e3ef; --bk:#f0e3c4; --qn:#d9e8cf;
+  --f-logo:var(--f-rcpt);
+  --f-ui:var(--f-rcpt);
+  --f-serif:var(--f-rcpt);
+  --f-px:var(--f-rcpt);
+  --f-rcpt:"Courier Prime","Courier New",Courier,monospace;
+  color-scheme:light;
+}
+html{background:#d3dbe8}
+body{background-color:#d3dbe8;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.45) 0 2px,transparent 2px 7px),linear-gradient(#c4cee0,#e3e8f1 400px);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px 28px}
+a{color:var(--navy-2)}
+.wrap{--wp:18px;max-width:1340px;margin:0 auto;display:flex;flex-direction:column;gap:14px;background:var(--paper);border:1px solid #8e9ab3;border-radius:4px;box-shadow:0 0 0 4px rgba(255,255,255,.7),0 10px 30px rgba(20,40,107,.25);padding:0 var(--wp) var(--wp);overflow:hidden}
+@media (max-width:700px){.wrap{--wp:10px}}
+button,input,select{font-family:var(--f-ui);font-size:15px}
+:focus-visible{outline:2px dotted var(--navy);outline-offset:2px}
+
+/* masthead */
+.topstrip{background:linear-gradient(#2d4fb3,#14286b);color:#fff;font-size:13px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:5px var(--wp);margin-inline:calc(-1 * var(--wp));border-bottom:1px solid #0b1a4a;box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+.topstrip b{color:var(--orange-2)}
+.mast{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:-14px calc(-1 * var(--wp)) 0;padding:12px var(--wp) 14px;background:linear-gradient(#ffffff,#e8edf7);border-bottom:4px solid var(--orange);box-shadow:0 1px 0 #c25700,0 3px 6px rgba(0,0,0,.08)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);min-width:0}
+.logo svg{width:64px;height:64px;flex:none}
+.wm{display:flex;flex-direction:column;line-height:.95;transform:skewX(-8deg)}
+.wm .a{font-family:var(--f-logo);font-weight:700;font-size:clamp(15px,2.2vw,22px);color:var(--navy);letter-spacing:.5px}
+.wm .b{font-family:var(--f-logo);font-weight:700;font-size:clamp(26px,4.6vw,46px);color:var(--orange);text-shadow:2px 2px 0 var(--navy);letter-spacing:-.5px}
+.ml{position:relative;display:inline-block}
+.mouse{position:absolute;left:50%;top:82%;width:24px;height:38px;margin-left:-12px;transform-origin:50% 2px;animation:swing 1.6s ease-in-out infinite alternate;pointer-events:none}
+.mouse svg{display:block;width:100%;height:100%}
+.ml:nth-of-type(2) .mouse{animation-delay:-.4s}.ml:nth-of-type(3) .mouse{animation-delay:-.9s}.ml:nth-of-type(4) .mouse{animation-delay:-1.3s}
+@keyframes swing{from{transform:rotate(-10deg)}to{transform:rotate(10deg)}}
+.wm .b{position:relative;padding-bottom:30px;margin-right:10px}
+.surf{position:absolute;right:-.2em;bottom:calc(30px + .52em);width:clamp(54px,7vw,84px);pointer-events:none;animation:land 1.4s cubic-bezier(.2,.8,.3,1.2) .3s both}
+@keyframes land{0%{transform:translate(70px,-60px) rotate(18deg);opacity:0}15%{opacity:1}70%{transform:translate(0,4px) rotate(-6deg)}100%{transform:none}}
+.surf svg{display:block;width:100%;height:auto;overflow:visible;animation:surf 2.2s ease-in-out 1.7s infinite;transform-origin:70% 85%;image-rendering:pixelated}
+@keyframes surf{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(5deg) translateY(-3px)}}
+.burst{position:relative;width:66px;height:66px;flex:none;display:grid;place-items:center;transform:rotate(-12deg)}
+.burst svg{position:absolute;inset:0}
+.burst span{position:relative;font-family:var(--f-logo);font-size:12px;color:var(--navy);line-height:1;text-align:center}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav a{font-size:13px;font-weight:bold;text-decoration:none;color:#fff;background:linear-gradient(#5a7de0,#14286b);border:1px solid #0b1a4a;border-radius:3px 3px 0 0;padding:5px 10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
+.nav a:hover{background:linear-gradient(#ffb347,#ff7a1a);color:var(--ink)}
+.index{font-size:13px;border:2px inset var(--silver);background:#0d1b12;color:#c8ffd4;font-family:var(--f-rcpt);padding:5px 9px;font-variant-numeric:tabular-nums;border-radius:2px}
+.index b{color:#62ff8a !important}
+.index b{color:#0a8a2a}
+
+/* toolbar */
+.toolbar{background:linear-gradient(#fbfcfe,#e2e6ee 55%,#d3d8e2);border:1px solid var(--silver-dk);border-radius:6px;box-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 rgba(0,0,0,.06),0 3px 8px rgba(20,40,107,.12);padding:10px 12px;display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center}
+.search{display:flex;gap:6px;flex:1 1 300px;min-width:0}
+.search input{flex:1;min-width:0;border:2px inset var(--silver);padding:6px 8px;background:#fff;color:var(--ink)}
+.gel{border:1px solid #b35500;border-radius:14px;padding:5px 16px;font-weight:bold;color:#3a1a00;cursor:pointer;
+  background:linear-gradient(#ffe0b0 0%,#ffb347 48%,#ff8a1f 52%,#ffb347 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 1px 2px rgba(0,0,0,.25)}
+.gel:active{transform:translateY(1px)}
+.grp{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.grp>.lbl{font-weight:bold;font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--navy)}
+.seg{display:inline-flex;border:1px solid var(--silver-dk);border-radius:4px;overflow:hidden;background:linear-gradient(#fff,#eceff5);box-shadow:0 1px 0 #fff}
+.seg label{display:block;cursor:pointer}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:block;padding:6px 11px;font-size:14px;border-left:1px solid var(--silver)}
+.seg label:first-child span{border-left:0}
+.seg input:checked+span{background:linear-gradient(#5a7de0,#14286b);color:#fff}
+.seg input:focus-visible+span{outline:2px dotted var(--navy);outline-offset:-3px}
+.price{display:flex;align-items:center;gap:6px}
+.price input{width:120px;accent-color:var(--orange)}
+.price output{font-weight:700;font-family:var(--f-logo);color:var(--orange);font-size:16px;min-width:3.4em;font-variant-numeric:tabular-nums}
+.toolbar select{border:2px inset var(--silver);background:#fff;padding:4px;color:var(--ink)}
+
+/* main */
+.main{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:14px;align-items:start}
+.mapcard{position:relative;background:var(--paper);border:1px solid #b6bccb;border-radius:6px;box-shadow:inset 0 0 0 5px #fff,inset 0 0 0 6px #d9dce3,0 3px 10px rgba(20,40,107,.14);min-width:0;overflow:hidden}
+.maphead{position:absolute;left:18px;top:14px;z-index:2;pointer-events:none}
+.maphead h2{font-family:var(--f-serif);font-style:normal;font-weight:700;font-size:clamp(24px,3vw,34px);margin:0;line-height:1}
+.maphead p{margin:4px 0 0;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.demo{position:absolute;right:12px;top:12px;z-index:2;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:#fff;border:1px dashed var(--muted);color:var(--muted);padding:3px 6px}
+#map{display:block;width:100%;height:auto}
+.boro{stroke:#fff;stroke-width:3;stroke-linejoin:round;filter:url(#lift)}
+.blab{font-family:var(--f-serif);font-style:normal;font-weight:700;font-size:34px;fill:var(--ink);opacity:.75;pointer-events:none}
+.food{cursor:pointer;transition:opacity .3s}
+#foods,.ic{shape-rendering:crispEdges}
+.ic{image-rendering:pixelated}
+.food .bob{animation:bob 1.2s cubic-bezier(.5,0,.5,1) infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
+.food:hover .bob,.food:focus-visible .bob{animation-duration:.35s}
+.food .shadow{fill:rgba(0,0,0,.18)}
+.food.off{opacity:.12;pointer-events:none}
+.food.sel .ring{stroke:var(--orange);stroke-width:4;fill:none}
+.food:focus{outline:none}
+.food:focus-visible .ring{stroke:var(--navy);stroke-width:4;stroke-dasharray:4 3;fill:none}
+@keyframes bob{0%{transform:translateY(0) scale(1.06,.94)}35%{transform:translateY(-6px) scale(.97,1.04)}100%{transform:translateY(-22px) scale(1,1)}}
+
+/* receipt */
+.rcpt{position:absolute;z-index:5;right:18px;bottom:18px;transform:rotate(-1.2deg);width:min(360px,calc(100% - 24px));background:#fffdf7;color:var(--ink);font-family:var(--f-rcpt);font-size:15px;padding:18px 18px 22px;box-shadow:0 10px 30px rgba(0,0,0,.18),0 1px 2px rgba(0,0,0,.2);
+  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 8px) no-repeat,radial-gradient(circle at 6px 0,transparent 5px,#000 5.5px) bottom/12px 8px repeat-x;
+          mask:linear-gradient(#000 0 0) top/100% calc(100% - 8px) no-repeat,radial-gradient(circle at 6px 0,transparent 5px,#000 5.5px) bottom/12px 8px repeat-x}
+.rcpt .rh{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.rcpt .x{background:none;border:0;font-size:18px;cursor:pointer;color:var(--ink);padding:0 4px;font-family:var(--f-ui)}
+.rcpt h3{font-family:var(--f-serif);font-style:normal;font-weight:700;font-size:24px;margin:10px 0 2px;line-height:1.1;text-wrap:balance}
+.rcpt .nb{font-size:14px;color:var(--muted)}
+.rcpt .deal{margin:8px 0 0}
+.rcpt dl{margin:10px 0 0;border-top:1px dashed var(--ink);border-bottom:1px dashed var(--ink);padding:6px 0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px}
+.rcpt dd{margin:0;text-align:right}
+.rcpt .tot{font-weight:700;font-size:20px}
+.rcpt .bar{height:30px;margin-top:10px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px,var(--ink) 8px 11px,transparent 11px 12px)}
+.rcpt .thx{text-align:center;font-size:12px;font-weight:700;letter-spacing:2px;margin-top:6px}
+.rcpt .pn{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:14px}
+.rcpt .pn button{background:none;border:0;cursor:pointer;font-family:var(--f-rcpt);font-size:14px;font-weight:700;color:var(--ink);padding:4px}
+.rcpt .feed{margin-top:8px;width:100%}
+
+/* digest-o-tron */
+.dot{background:linear-gradient(#eef0f4,#c3c8d2);border:1px solid var(--silver-dk);border-radius:8px;box-shadow:inset 0 1px 0 #fff,0 3px 10px rgba(20,40,107,.16);padding:6px;min-width:0}
+.dot .tb{font-family:var(--f-px);font-size:13px !important;display:flex;justify-content:space-between;align-items:center;gap:6px;background:linear-gradient(#5a7de0,#14286b);color:#fff;border-radius:4px;padding:5px 8px;font-weight:bold;font-size:12px}
+.dot .tb span:last-child{font-weight:700;font-size:12px;opacity:.85}
+.crt{position:relative;margin-top:6px;border:3px solid #2b2f3a;border-radius:6px;overflow:hidden;background:#111}
+.crt::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(rgba(0,0,0,.13) 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,transparent 60%,rgba(0,0,0,.28));}
+#hudsvg{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+#dsvg{display:block;width:100%;height:auto;background:#fff;image-rendering:pixelated}
+.status{font-family:var(--f-px);font-size:13px;font-weight:700;line-height:1.5;background:#0d1b12;color:#62ff8a;padding:6px 8px;margin-top:6px;border-radius:3px;min-height:2.8em}
+.tract{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.plab{font-family:var(--f-px);font-size:12.5px;font-weight:700;text-rendering:geometricPrecision;fill:var(--ink);letter-spacing:.3px;paint-order:stroke;stroke:var(--board);stroke-width:3px;stroke-linejoin:round}
+.zlab{font-family:var(--f-px);font-size:12.5px;font-weight:700;fill:#1d2230;paint-order:stroke;stroke:#fff;stroke-width:3px;text-rendering:geometricPrecision}
+.plq{font-family:var(--f-ui);font-size:8px;font-weight:700;fill:var(--ink)}
+.plq.t{font-family:var(--f-serif);font-style:normal;font-weight:700;font-size:10px}
+
+/* directory */
+.card{background:#fff;border:1px solid var(--silver-dk);border-radius:6px;overflow:hidden;box-shadow:0 3px 8px rgba(20,40,107,.12)}
+.card>h2{margin:0;font-size:15px;display:flex;align-items:center;gap:8px;background:linear-gradient(#ffffff,#e4e8f0 50%,#d3d8e2 51%,#e2e6ee);border-bottom:1px solid var(--silver-dk);box-shadow:inset 0 1px 0 #fff;padding:7px 10px;color:var(--navy);text-transform:uppercase;letter-spacing:1px}
+.tblwrap{overflow-x:auto;max-height:420px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:6px 10px;border-bottom:1px solid #eceef2;white-space:nowrap}
+th{position:sticky;top:0;background:#fff;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:bold}
+td.deal{white-space:normal;min-width:240px}
+.card>h2::before{content:"";width:10px;height:10px;flex:none;background:linear-gradient(135deg,#ffd08a,#ff7a1a);border:1px solid #b35500;box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
+tbody tr{cursor:pointer}
+tbody tr:nth-child(even){background:#f5f7fb}
+tbody tr:hover,tbody tr:focus-visible{background:#fff4e6;outline:none}
+tbody tr.sel{background:#ffe6c7}
+.ic{width:22px;height:22px;vertical-align:middle}
+.days{font-size:12px;font-weight:bold;padding:1px 6px;border-radius:8px;color:#fff}
+.days.wk{background:var(--navy-2)}.days.we{background:#a43bb8}.days.all{background:#0a8a2a}
+.empty{padding:16px;color:var(--muted)}
+.about{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.about .card p{margin:0;padding:12px;font-size:14px}
+.foot{text-align:center;font-size:13px;color:#45506a;margin:0 calc(-1 * var(--wp)) calc(-1 * var(--wp));padding:12px var(--wp);background:linear-gradient(#e6eaf2,#cfd5e1);border-top:1px solid #aab3c6;display:flex;flex-direction:column;gap:6px;align-items:center}
+.badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.badges span{border:1px solid var(--silver-dk);background:linear-gradient(#fff,#e3e5ea);font-size:11px;font-weight:bold;padding:3px 6px;color:var(--navy)}
+#fly{position:fixed;left:0;top:0;width:44px;height:44px;pointer-events:none;z-index:50;display:none}
+
+@media (max-width:700px){.rcpt{position:relative;left:auto;top:auto;right:auto;bottom:auto;transform:rotate(-1deg);margin:0 auto 18px}.maphead{position:static;padding:14px 16px 0}.demo{position:static;display:inline-block;margin:6px 16px 0}}
+@media (max-width:700px){
+  .mast{gap:10px}.nav{width:100%}.nav a{flex:1;text-align:center;padding:10px 2px;border-radius:3px;font-size:12px;letter-spacing:-.3px}
+  .index{width:100%;text-align:center}
+  .toolbar{gap:10px}.grp{width:100%}.seg{flex:1}.seg label{flex:1}.seg span{text-align:center;padding:9px 4px}
+  .price input{flex:1}.toolbar select{flex:1;padding:8px}.search input{padding:10px}.gel{padding:8px 18px}
+  .blab{font-size:46px}
+  table,thead,tbody,tr,td{display:block}thead{display:none}
+  tbody tr{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:2px 8px;padding:10px;border-bottom:1px solid #e3e7ef}
+  td{padding:0;border:0;white-space:normal}
+  td:nth-child(1){grid-row:1/4}td:nth-child(2){grid-column:2}td:nth-child(7){grid-column:3;grid-row:1}
+  td:nth-child(3){grid-column:2/4;font-size:13px;color:var(--muted)}td:nth-child(4){grid-column:2/4;min-width:0}
+  td:nth-child(5),td:nth-child(6){grid-column:2/4;display:inline;font-size:13px}
+  .tblwrap{max-height:none}
+  .rcpt .pn button{padding:8px}
+}
+@media (max-width:1060px){.main{grid-template-columns:minmax(0,1fr)}.dot{max-width:520px;width:100%;justify-self:center}.about{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){.food .bob,.mouse,.surf,.surf svg{animation:none}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <div class="topstrip"><span>Welcome to the <b>#1 lunch portal</b> for the five-ish boroughs!</span></div>
+
+  <header class="mast">
+    <a class="logo" href="#top" aria-label="NYC's Tough Times Lunch Specials home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd08a"/><stop offset="1" stop-color="#ff7a1a"/></linearGradient></defs>
+        <circle cx="32" cy="32" r="28" fill="url(#lg1)" stroke="#14286b" stroke-width="3"/>
+        <path d="M14 48c6-8 22-12 38-9" fill="none" stroke="#14286b" stroke-width="5" stroke-linecap="round"/>
+        <path d="M16 54c10-4 22-5 32-2" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+        <text x="32" y="33" text-anchor="middle" font-family="Courier Prime,Courier New,monospace" font-weight="700" font-size="15" fill="#14286b">$15</text></svg>
+      <span class="wm"><span class="a">NYC's Tough Times</span><span class="b" aria-label="Lunch Specials"><span class="ml">L<i class="mouse"></i></span>un<span class="ml">c<i class="mouse"></i></span>h S<span class="ml">p<i class="mouse"></i></span>ec<span class="ml">i<i class="mouse"></i></span>als<span class="surf" aria-hidden="true"><svg viewBox="0 0 92 72"><defs><filter id="pxc" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" x="0" y="0" width="140" height="110"><feFlood x="1" y="1" width="1" height="1"/><feComposite x="0" y="0" width="3" height="3"/><feTile result="t"/><feComposite in="SourceGraphic" in2="t" operator="in"/><feMorphology operator="dilate" radius="1"/></filter></defs><g transform="scale(.6667)"><g filter="url(#pxc)"><g transform="scale(1.5)"><g transform="translate(92 0) scale(-1 1)">
+          <g class="board"><path d="M8 50 Q2 57 9 64 L90 58Z" fill="#ffd36b" stroke="#2a1d14" stroke-width="3" stroke-linejoin="round"/><path d="M8 50 Q2 57 9 64 L15 63 Q10 57 14 51Z" fill="#c9792e" stroke="#2a1d14" stroke-width="3" stroke-linejoin="round"/><circle cx="30" cy="57" r="3.2" fill="#d63a2a"/><circle cx="50" cy="58" r="2.8" fill="#d63a2a"/><circle cx="68" cy="58" r="2.2" fill="#d63a2a"/></g>
+          <g class="cat" stroke="#000" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M28 38 Q14 30 18 12" fill="none" stroke="#1f1f24" stroke-width="6"/><circle cx="18" cy="12" r="3" fill="#fff"/>
+            <path d="M34 54 L32 44M54 54 L52 44" stroke="#1f1f24" stroke-width="6"/><ellipse cx="33" cy="55" rx="4" ry="2.4" fill="#fff"/><ellipse cx="53" cy="55" rx="4" ry="2.4" fill="#fff"/>
+            <ellipse cx="43" cy="38" rx="14" ry="9" fill="#1f1f24" transform="rotate(-12 43 38)"/>
+            <ellipse cx="51" cy="37" rx="5" ry="6" fill="#fff" stroke="none"/>
+            <path d="M52 33 L70 26" stroke="#1f1f24" stroke-width="6"/><circle cx="71" cy="26" r="3.2" fill="#fff"/>
+            <path d="M36 33 L24 24" stroke="#1f1f24" stroke-width="6"/><circle cx="23" cy="23" r="3.2" fill="#fff"/>
+            <circle cx="56" cy="20" r="10" fill="#1f1f24"/>
+            <path d="M48 14 L48 3 L55 11Z M58 10 L65 2 L65 14Z" fill="#1f1f24"/>
+            <path d="M56.5 12 L54 20 L59 20Z" fill="#fff" stroke="none"/>
+            <ellipse cx="56.5" cy="24" rx="6" ry="4.4" fill="#fff" stroke="none"/>
+            <circle cx="52" cy="18" r="2.4" fill="#d7f25a" stroke="none"/><circle cx="61" cy="18" r="2.4" fill="#d7f25a" stroke="none"/>
+            <circle cx="52.4" cy="18" r="1" fill="#000" stroke="none"/><circle cx="61.4" cy="18" r="1" fill="#000" stroke="none"/>
+            <circle cx="56.5" cy="22" r="1.4" fill="#f4a6b8" stroke="none"/>
+          </g></g></g></g></g></svg></span></span></span>
+    </a>
+    <nav class="nav" aria-label="Sections"><a href="#map-sec">Lunch Map</a><a href="#digest">Digest-O-Tron</a><a href="#dir">Directory</a><a href="#about">About Us</a></nav>
+    <div class="index" id="lindex">LUNCH INDEX ...</div>
+  </header>
+
+  <form class="toolbar" id="tools" role="search">
+    <div class="search"><label class="sr" for="q" style="position:absolute;left:-9999px">Search lunch specials</label>
+      <input id="q" type="search" placeholder="Search dumplings, Astoria, chopped cheese..." autocomplete="off">
+      <button class="gel" type="submit">GO!</button></div>
+    <div class="grp"><span class="lbl">Days</span>
+      <div class="seg" role="radiogroup" aria-label="Days">
+        <label><input type="radio" name="days" value="any" checked><span>Any</span></label>
+        <label><input type="radio" name="days" value="wk"><span>Weekdays</span></label>
+        <label><input type="radio" name="days" value="we"><span>Weekends</span></label>
+        <label><input type="radio" name="days" value="all"><span>Both</span></label>
+      </div></div>
+    <div class="grp price"><label class="lbl" for="max">Under</label><input id="max" type="range" min="6" max="15" step="0.5" value="15"><output id="maxo" for="max">$15.00</output></div>
+    <div class="grp"><label class="lbl" for="cz">Cuisine</label><select id="cz"><option value="">All cuisines</option></select></div>
+    <div class="grp"><label class="lbl" for="bz">Borough</label><select id="bz"><option value="">All three</option><option value="mn">Manhattan</option><option value="bk">Brooklyn</option><option value="qn">Queens</option></select></div>
+  </form>
+
+  <div class="main">
+    <section class="mapcard" id="map-sec" aria-label="Lunch map">
+      <div class="maphead"><h2>The Lunch Map.</h2><p id="count">0 specials</p></div>
+      <div class="demo">Sample listings</div>
+      <svg id="map" viewBox="-90 -70 1180 1340" role="img" aria-label="Manhattan, Brooklyn and Queens with a bouncing food icon for each lunch special">
+        <defs>
+          <filter id="pxi" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" x="-24" y="-24" width="48" height="48"><feFlood x="-23" y="-23" width="1" height="1"/><feComposite x="-24" y="-24" width="3" height="3"/><feTile result="t"/><feComposite in="SourceGraphic" in2="t" operator="in"/><feMorphology operator="dilate" radius="1"/></filter>
+          <filter id="lift" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity=".14"/></filter>
+          <pattern id="grain" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="none"/><circle cx="1" cy="1" r=".6" fill="rgba(0,0,0,.05)"/><circle cx="4" cy="4" r=".5" fill="rgba(255,255,255,.4)"/></pattern>
+        </defs>
+        <g id="boros"></g>
+        <g id="foods"></g>
+      </svg>
+      <div class="rcpt" id="rcpt" hidden></div>
+    </section>
+
+    <section class="dot" id="digest" aria-label="Digest-O-Tron">
+      <div class="tb"><span>DIGEST-O-TRON 3000</span><span>surgery · compost · fine art</span></div>
+      <div class="crt"><svg id="dsvg" viewBox="0 0 400 1010" shape-rendering="crispEdges" role="img" aria-label="A surgery game board patient. Food travels through his digestive tract, becomes compost for a flower pot, and the flowers end up as an ikebana arrangement in a museum.">
+        <defs>
+          <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8f6f1"/><stop offset="1" stop-color="#cfe9e3"/></linearGradient>
+          <linearGradient id="spot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff7cf" stop-opacity=".9"/><stop offset="1" stop-color="#fff7cf" stop-opacity="0"/></linearGradient>
+          <filter id="px" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" x="0" y="0" width="400" height="1010"><feFlood x="2" y="2" width="1" height="1"/><feComposite x="0" y="0" width="5" height="5"/><feTile result="t"/><feComposite in="SourceGraphic" in2="t" operator="in"/><feMorphology operator="dilate" radius="2"/></filter>
+          <pattern id="dTray" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#1f4fd1"/><rect width="2" height="2" fill="#163fae"/><rect x="2" y="2" width="2" height="2" fill="#163fae"/></pattern>
+          <pattern id="dBoard" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#c9ecd8"/><rect width="4" height="4" fill="#b7e0c9"/></pattern>
+          <pattern id="dGlass" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#dff2ec"/><rect x="4" y="4" width="4" height="4" fill="#c4e6dc"/></pattern>
+          <pattern id="dWall" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#efe9dc"/><rect width="4" height="4" fill="#e5ddcb"/></pattern>
+          <pattern id="dFloor" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#b89a6e"/><rect width="8" height="4" fill="#a8895c"/></pattern>
+          <radialGradient id="lamp"><stop offset="0" stop-color="#ffb3b3"/><stop offset="1" stop-color="#d4141c"/></radialGradient>
+          <radialGradient id="lampY"><stop offset="0" stop-color="#ffffff"/><stop offset=".35" stop-color="#fff36b"/><stop offset="1" stop-color="#ffd000"/></radialGradient>
+          <radialGradient id="glowY"><stop offset="0" stop-color="#fff36b" stop-opacity=".9"/><stop offset="1" stop-color="#fff36b" stop-opacity="0"/></radialGradient>
+        </defs>
+        <g id="scene" filter="url(#px)">
+        <!-- STAGE 1: surgery board -->
+        <rect x="8" y="8" width="384" height="552" rx="22" fill="url(#dTray)"/>
+        <rect x="8" y="8" width="384" height="552" rx="22" fill="none" stroke="#0e2a85" stroke-width="5"/>
+        <rect x="24" y="24" width="352" height="520" rx="8" fill="url(#dBoard)"/>
+        
+        <g id="lampG"><circle id="lampGlow" cx="350" cy="52" r="30" fill="url(#glowY)" opacity="0"/><circle cx="350" cy="52" r="13" fill="#7a0d12"/><circle id="lampOn" cx="350" cy="52" r="10" fill="url(#lamp)" opacity=".25"/></g>
+        <!-- patient (original character: overworked office guy) -->
+        <g stroke="#3a2a20" stroke-width="5" stroke-linejoin="round">
+          <path d="M150 168 Q90 180 62 250 Q50 290 56 300 Q72 306 80 290 Q96 236 140 214Z" fill="var(--skin)"/>
+          <path d="M250 168 Q310 180 338 250 Q350 290 344 300 Q328 306 320 290 Q304 236 260 214Z" fill="var(--skin)"/>
+          <path d="M176 400 Q160 470 158 520 Q178 532 196 520 Q198 462 200 430 Q202 462 204 520 Q222 532 242 520 Q240 470 224 400Z" fill="var(--skin)"/>
+          <path d="M200 150 Q262 150 268 200 Q284 290 262 360 Q246 412 200 414 Q154 412 138 360 Q116 290 132 200 Q138 150 200 150Z" fill="var(--skin)"/>
+          <rect x="186" y="132" width="28" height="26" fill="var(--skin)"/>
+          <ellipse cx="200" cy="95" rx="48" ry="52" fill="var(--skin)"/>
+          <ellipse cx="152" cy="98" rx="8" ry="12" fill="var(--skin)"/><ellipse cx="248" cy="98" rx="8" ry="12" fill="var(--skin)"/>
+        </g>
+        <path d="M154 72 Q160 38 200 40 Q244 40 248 74 Q236 58 214 60 Q206 50 196 58 Q172 52 154 72Z" fill="#4b3a8f" stroke="#3a2a20" stroke-width="5"/>
+        <g fill="none" stroke="#3a2a20" stroke-width="5"><circle cx="182" cy="92" r="11" fill="#fff"/><circle cx="218" cy="92" r="11" fill="#fff"/><path d="M193 92h14"/></g>
+        <circle cx="183" cy="94" r="3" fill="#3a2a20"/><circle cx="217" cy="94" r="3" fill="#3a2a20"/>
+        <path d="M172 76l18 4M228 76l-18 4" stroke="#3a2a20" stroke-width="5" stroke-linecap="round"/>
+        <ellipse id="mouth" cx="200" cy="126" rx="12" ry="4" fill="var(--cav)" stroke="#3a2a20" stroke-width="5"/>
+        <!-- tie + lanyard -->
+        <path d="M194 158 L206 158 L210 172 L204 236 L200 244 L196 236 L190 172Z" fill="var(--orange)" stroke="#3a2a20" stroke-width="5"/>
+        <path d="M178 156 Q186 210 228 212 Q242 186 222 156" fill="none" stroke="#14286b" stroke-width="5"/>
+        <rect x="216" y="208" width="26" height="18" rx="2" fill="#fff" stroke="#3a2a20" stroke-width="5"/>
+        <!-- digestive cavity -->
+        <path id="tractBed" class="tract" d="" stroke="#3a2a20" stroke-width="20"/>
+        <path id="tractCav" class="tract" d="" stroke="var(--cav)" stroke-width="12"/>
+        <path id="tractHi" class="tract" d="" stroke="var(--cav-2)" stroke-width="4" opacity=".7"/>
+        <!-- cavity labels -->
+        <!-- compost chute -->
+        <rect x="190" y="430" width="20" height="216" fill="#b9bfca" stroke="#5b6270" stroke-width="5"/>
+        <rect x="186" y="540" width="28" height="22" fill="#9aa1ad" stroke="#5b6270" stroke-width="5"/>
+        
+        <!-- STAGE 2: greenhouse -->
+        <rect x="24" y="572" width="352" height="214" rx="6" fill="url(#dGlass)" stroke="#8fb9ac" stroke-width="5"/>
+        <path d="M24 640H376M24 712H376M112 572V786M200 572V640M288 572V786" stroke="#ffffff" stroke-width="5" opacity=".7"/>
+        
+        <g id="potPlants"></g>
+        <path d="M150 700 H250 L238 776 H162Z" fill="#c8693c" stroke="#7a3a1c" stroke-width="5"/>
+        <rect x="144" y="690" width="112" height="16" rx="3" fill="#d97b4a" stroke="#7a3a1c" stroke-width="5"/>
+        <ellipse id="soil" cx="200" cy="692" rx="50" ry="5" fill="#6b4a2b"/>
+        <!-- STAGE 3: museum -->
+        <rect x="24" y="798" width="352" height="204" fill="url(#dWall)" stroke="#c8c1b0" stroke-width="5"/>
+        <rect x="24" y="960" width="352" height="42" fill="url(#dFloor)"/>
+        
+        <polygon id="spotlight" points="170,798 230,798 300,960 100,960" fill="url(#spot)" opacity="0"/>
+        <rect x="140" y="930" width="120" height="60" fill="#fbfaf6" stroke="#b8b0a0" stroke-width="5"/>
+        <g id="ikebana"></g>
+        <path d="M146 918 Q200 936 254 918 L250 928 Q200 942 150 928Z" fill="#2b2f36" stroke="#111" stroke-width="5"/>
+        
+        <g id="mover"></g>
+        </g>
+      </svg><svg id="hudsvg" viewBox="0 0 400 1010" aria-hidden="true">
+        <g id="hud">
+          <text x="36" y="536" class="zlab">STAGE 1 · SURGERY</text>
+          <text x="350" y="78" text-anchor="middle" class="plab">BUZZ</text>
+          <text x="220" y="600" class="zlab">COMPOST CHUTE</text>
+          <text x="34" y="590" class="zlab">STAGE 2 · GREENHOUSE</text>
+          <text x="34" y="816" class="zlab">STAGE 3 · MUSEUM</text>
+          <text x="366" y="816" text-anchor="end" class="zlab" id="acq">PERMANENT COLLECTION: 0 WORKS</text>
+        <g id="labs">
+          <g data-at="0.10"><text x="70" y="176" class="plab">FOOD CHUTE</text><path d="M144 178 L190 186" stroke="#3a2a20" stroke-width="1.2" marker-end=""/></g>
+          <g data-at="0.25"><text x="282" y="232" class="plab">GUT FEELING</text><path d="M282 234 L260 240" stroke="#3a2a20" stroke-width="1.2"/></g>
+          <g data-at="0.55"><text x="276" y="330" class="plab">SMALL TALK</text><path d="M276 326 L258 330" stroke="#3a2a20" stroke-width="1.2"/></g>
+          <g data-at="0.85"><text x="62" y="392" class="plab">SEMI-COLON</text><path d="M136 388 L158 384" stroke="#3a2a20" stroke-width="1.2"/></g>
+        </g>
+        <g id="placard" opacity="0">
+          <rect x="262" y="880" width="110" height="72" fill="#fff" stroke="#b8b0a0"/>
+          <text x="267" y="896" class="plq t" id="pq1"></text>
+          <text x="267" y="910" class="plq" id="pq2"></text>
+          <text x="267" y="922" class="plq" id="pq3"></text>
+          <text x="267" y="934" class="plq" id="pq4"></text>
+        </g>
+        </g>
+      </svg></div>
+      <div class="status" id="status" aria-live="polite">&gt; READY. Click any bouncing lunch to begin surgery.</div>
+    </section>
+  </div>
+
+  <section class="card" id="dir">
+    <h2>Lunch Directory</h2>
+    <div class="tblwrap"><table><thead><tr><th></th><th>Spot</th><th>Neighborhood</th><th>The deal</th><th>Days</th><th>Hours</th><th style="text-align:right">Price</th></tr></thead><tbody id="rows"></tbody></table></div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="card"><h2>Our Mission</h2><p>Times are tough. Lunch shouldn't be. We track lunch specials under $15 across Manhattan, Brooklyn and Queens, so you can eat like a king on a temp's salary.</p></div>
+    <div class="card"><h2>How it works</h2><p>Search or filter, then click a bouncing lunch. Its receipt pops up and the Digest-O-Tron takes it from first bite to fine art: patient, compost, greenhouse, museum.</p></div>
+    <div class="card"><h2>Fine print</h2><p>The restaurants listed here are samples, not real businesses. Prices and days are examples. Real specials change often, so always confirm with the restaurant.</p></div>
+  </section>
+
+  <footer class="foot">
+    <div class="badges"><span>BEST VIEWED AT 1024×768</span><span>Y2K COMPLIANT</span><span>100% PURE HTML</span><span>PATENT PENDING</span></div>
+    <div>© 2026 Tough Times Interactive, Inc. · A fictional company having a very real lunch.</div>
+  </footer>
+</div>
+<svg id="fly" viewBox="-22 -22 44 44" aria-hidden="true"><defs><filter id="pxf" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" x="-22" y="-22" width="44" height="44"><feFlood x="-20" y="-20" width="1" height="1"/><feComposite x="-22" y="-22" width="5" height="5"/><feTile result="t"/><feComposite in="SourceGraphic" in2="t" operator="in"/><feMorphology operator="dilate" radius="2"/></filter></defs></svg>
+
+<script>
+const BORO = {"paths":{"qn":"M698,276L717,291L722,287L742,294L757,292L768,296L774,299L772,311L779,323L786,317L807,315L809,313L803,311L811,314L814,302L807,299L818,292L827,294L843,324L833,331L827,324L851,359L855,357L851,359L860,381L879,405L889,410L901,427L914,436L915,443L920,446L909,428L902,426L889,405L887,389L894,383L888,365L901,345L1045,463L1050,514L1028,558L997,565L961,580L971,627L975,744L969,765L967,808L977,849L947,859L929,870L926,896L933,915L926,916L930,907L921,905L922,901L919,908L913,909L917,903L912,909L915,895L912,884L907,877L890,867L911,891L908,914L860,938L843,974L840,960L830,977L840,960L827,945L818,946L801,974L803,985L814,995L813,999L791,1012L783,1022L783,1018L773,1011L755,1005L773,964L788,964L806,943L808,934L788,919L763,931L784,919L780,913L704,872L695,862L689,837L692,822L703,815L724,817L703,811L689,819L684,837L690,866L681,858L680,865L674,862L667,852L665,844L673,835L663,841L673,830L670,823L672,830L664,839L661,829L664,834L662,828L667,826L660,827L667,864L655,865L644,815L646,812L641,812L652,876L613,881L604,868L613,853L604,856L594,853L578,833L583,826L579,826L580,822L578,825L583,826L579,832L573,826L589,819L587,806L595,805L589,775L581,776L575,746L572,746L570,733L564,735L556,684L541,688L495,726L494,723L487,729L482,722L475,733L462,712L461,698L448,688L453,682L431,666L434,661L427,656L431,652L401,629L404,625L394,607L405,604L400,602L391,579L394,574L405,574L392,571L380,556L354,548L343,527L331,521L344,514L352,500L348,499L340,514L327,519L308,512L287,518L282,515L290,497L288,495L293,493L291,491L294,492L292,490L299,477L309,481L301,474L304,474L338,416L349,403L363,395L364,390L354,381L359,369L366,364L378,371L381,370L415,340L436,314L464,322L477,335L469,346L462,346L457,356L461,349L469,349L481,340L477,344L479,350L481,348L479,351L482,347L485,350L486,345L489,348L485,350L491,362L487,367L489,376L494,365L496,382L512,379L509,357L527,354L524,346L538,351L549,333L553,336L559,328L553,337L557,342L545,353L597,387L592,394L587,394L593,400L584,406L574,408L585,426L591,418L592,423L587,425L592,427L586,426L609,436L613,433L612,430L605,432L612,429L615,433L643,411L642,406L627,413L618,408L615,396L612,395L615,392L607,388L614,381L614,364L612,359L607,361L612,358L604,360L613,357L606,356L613,356L609,352L613,348L596,349L595,345L588,342L583,335L588,329L603,325L597,323L598,317L604,314L601,303L604,299L614,305L615,297L622,294L630,299L631,294L634,297L632,291L636,297L639,288L647,285L640,289L645,292L649,303L648,322L653,320L661,324L666,321L666,313L676,307L671,292L684,290L698,276ZM855,996L859,998L860,1005L874,1009L870,1016L875,1009L887,1012L910,1004L916,1005L924,1023L938,1041L939,1060L933,1066L928,1064L933,1066L939,1061L940,1073L914,1073L893,1086L871,1083L828,1088L718,1115L658,1137L574,1180L555,1185L552,1189L550,1187L480,1217L445,1222L347,1272L346,1276L348,1226L389,1199L413,1195L430,1186L430,1183L445,1194L461,1194L476,1185L478,1178L487,1172L497,1175L511,1172L511,1175L512,1171L530,1171L602,1123L610,1120L643,1121L645,1117L674,1110L676,1105L685,1101L695,1102L724,1081L725,1078L729,1081L730,1076L740,1082L741,1087L741,1082L745,1085L734,1076L740,1068L750,1079L748,1073L751,1072L742,1064L744,1060L755,1053L780,1051L795,1039L798,1039L784,1062L784,1070L786,1066L788,1071L790,1059L806,1041L805,1031L823,1013L833,1017L832,1022L828,1016L832,1023L832,1034L821,1050L816,1048L811,1057L816,1063L831,1044L835,1058L851,1059L842,1053L848,1015L839,1007L837,1012L833,1005L835,998L855,996ZM689,901L696,936L710,956L702,964L712,968L712,973L706,984L709,996L716,995L710,1001L712,1011L715,1008L714,1022L707,1031L703,1053L696,1071L663,1072L656,1068L663,1060L675,1060L681,1053L685,1056L688,1051L695,1051L686,1048L690,1041L691,1029L700,1011L696,1004L694,1018L683,997L678,999L667,993L658,996L660,948L666,925L660,903L663,901L675,913L682,913L686,911L687,897L689,901Z","bk":"M246,584L269,593L267,603L272,594L273,598L275,595L281,599L294,621L320,630L333,661L321,667L319,675L311,678L314,682L308,693L312,692L316,702L312,687L316,684L315,678L322,675L322,669L333,666L336,668L338,672L332,676L344,695L341,699L371,722L367,726L374,731L371,736L393,752L388,758L401,768L402,782L415,803L422,792L427,799L434,793L435,796L481,758L496,754L504,805L510,803L512,816L515,816L521,846L529,845L535,875L527,876L529,889L513,896L512,901L531,926L527,940L530,953L514,957L502,967L506,971L497,963L491,948L485,945L465,910L493,971L499,974L480,980L468,971L457,952L447,951L441,936L431,931L438,943L436,940L440,939L440,947L468,973L472,982L453,1002L452,1007L456,1012L453,1015L449,1010L442,1012L427,1030L417,1034L357,997L354,1000L398,1027L396,1030L403,1038L415,1038L417,1065L431,1072L423,1078L431,1074L435,1077L425,1095L406,1100L401,1076L398,1076L401,1081L379,1054L382,1060L379,1056L377,1058L398,1081L400,1099L390,1102L388,1096L380,1095L382,1100L379,1096L376,1098L381,1105L365,1106L356,1095L355,1087L363,1076L363,1063L357,1069L359,1071L356,1069L359,1075L352,1082L352,1092L348,1090L352,1093L348,1091L363,1110L374,1113L379,1111L374,1113L379,1115L409,1107L428,1108L452,1100L467,1167L473,1179L464,1198L418,1211L414,1199L415,1187L408,1169L393,1172L386,1167L386,1171L370,1173L370,1142L355,1122L342,1114L333,1122L319,1111L319,1106L314,1106L311,1111L314,1114L325,1121L363,1163L349,1175L333,1177L323,1169L335,1155L321,1165L316,1160L317,1144L310,1141L314,1161L318,1165L318,1169L313,1171L322,1171L331,1180L366,1175L369,1185L354,1186L360,1189L370,1187L371,1191L361,1192L334,1185L314,1188L283,1184L249,1187L249,1191L280,1194L310,1193L313,1215L276,1214L233,1224L208,1224L196,1227L197,1229L193,1227L191,1231L163,1231L161,1239L160,1231L139,1236L109,1235L106,1238L104,1228L77,1218L74,1206L79,1198L95,1191L118,1193L119,1196L146,1203L153,1192L148,1200L137,1194L141,1180L126,1190L112,1186L111,1182L118,1178L114,1174L130,1165L119,1170L126,1162L111,1173L119,1166L114,1163L121,1153L112,1154L117,1146L109,1150L102,1136L76,1116L22,1101L7,1085L-6,1061L-10,1027L-8,1005L5,971L-1,968L5,970L8,964L5,961L13,950L18,953L23,946L30,951L36,943L27,933L37,941L40,939L36,935L42,937L40,926L36,924L42,924L38,921L46,924L38,918L50,925L43,916L51,917L45,912L49,914L49,909L58,915L54,908L60,913L62,910L55,903L64,908L57,900L66,904L61,896L69,901L70,899L61,892L67,887L78,894L80,891L72,884L76,882L87,891L91,887L82,880L85,877L100,884L95,878L102,881L90,871L102,879L98,870L109,878L114,873L104,865L115,857L116,845L112,856L106,857L104,861L95,859L92,866L97,847L90,862L92,856L84,857L79,870L63,871L56,845L61,847L64,871L77,867L82,855L79,849L71,852L78,848L68,848L71,843L67,847L75,838L68,843L65,840L69,833L58,842L62,837L60,831L57,831L60,826L54,824L59,821L55,819L59,818L56,814L75,798L77,801L71,806L74,811L84,800L81,796L78,797L89,788L95,789L104,772L110,773L107,765L128,718L139,720L141,716L176,712L178,723L183,717L180,724L182,727L185,724L183,728L187,729L184,737L188,730L193,735L191,729L198,735L192,725L202,733L192,722L203,729L187,712L193,711L187,706L197,713L194,700L200,716L208,722L202,716L200,695L208,670L221,650L223,638L236,640L225,635L223,604L234,588L246,584Z","mn":"M288,-20L300,-17L299,-8L303,-2L307,-5L304,-12L310,-9L311,-3L314,-8L313,-6L319,-8L328,-5L335,4L328,23L323,32L319,31L320,36L308,52L302,48L305,55L278,105L263,144L265,243L280,275L279,295L260,314L257,320L259,323L256,321L249,336L238,344L237,352L242,372L158,494L153,527L148,527L152,528L147,529L156,560L149,596L140,622L127,627L107,630L105,627L78,632L69,639L68,646L63,644L64,647L59,647L62,651L57,649L60,654L56,649L53,651L56,656L53,652L45,658L50,659L48,663L44,658L40,660L41,665L40,662L34,666L32,661L28,664L16,642L21,616L24,618L25,614L21,615L24,593L34,595L35,589L30,586L35,587L38,565L28,564L39,563L39,556L30,555L31,547L40,548L41,538L32,537L41,536L37,534L41,533L42,514L36,508L45,508L37,505L45,505L46,502L37,497L47,496L45,491L38,491L38,488L45,489L39,485L46,485L39,482L46,481L40,477L45,473L41,471L45,472L45,463L48,464L43,461L48,463L58,442L53,434L59,437L66,428L60,424L66,427L68,424L62,419L70,421L63,416L74,420L75,418L66,412L76,416L78,412L68,407L78,411L80,407L71,402L81,406L83,403L73,397L81,400L83,397L76,392L83,396L87,390L81,385L89,386L82,382L90,386L84,380L90,383L95,375L105,358L97,358L105,357L115,336L113,333L110,337L113,333L115,336L117,331L114,332L118,331L177,219L193,196L191,191L195,193L191,188L198,175L200,172L204,174L215,154L230,110L228,85L243,72L270,19L277,-7L288,-20ZM303,276L320,291L325,303L311,319L298,344L283,353L263,345L260,339L275,314L288,315L287,311L290,311L284,314L286,311L282,309L286,297L285,278L291,272L303,276ZM24,691L38,694L34,696L38,700L35,709L23,716L28,718L21,722L22,716L6,726L5,731L6,726L-4,724L-5,719L15,692L24,691ZM243,399L196,464L185,473L203,444L240,389L248,384L243,399Z"},"minx":-56.133704002110875,"miny":-40.87762147653734,"s":3858.0760026983635,"kx":0.7581343361976521,"ex":{"mn":[-50,-20],"bk":[-10,50],"qn":[50,-20]}};
+/* ---------- CUISINE ICONS (viewBox -20..20) ---------- */
+const O='stroke="#2a1d14" stroke-width="2.8" stroke-linejoin="round"';
+const CUI={
+ pizza:{n:"Pizza",fl:["#e23b2e","#ffd23f"],svg:`<path d="M-16 -12 Q0 -20 16 -12 L0 18Z" fill="#ffd36b" ${O}/><path d="M-16 -12 Q0 -20 16 -12 L13 -6 Q0 -12 -13 -6Z" fill="#c9792e" ${O}/><circle cx="-4" cy="-2" r="3.2" fill="#d63a2a"/><circle cx="5" cy="1" r="3" fill="#d63a2a"/><circle cx="0" cy="8" r="2.4" fill="#d63a2a"/>`},
+ dumpling:{n:"Dumplings",fl:["#ffffff","#f7a1c4"],svg:`<path d="M-17 6 Q-16 -14 0 -14 Q16 -14 17 6 Q0 12 -17 6Z" fill="#fbf6ea" ${O}/><path d="M-8 -12 Q-6 -4 -4 -13M0 -14 Q1 -5 3 -13M7 -12 Q8 -4 10 -10" fill="none" stroke="#2a1d14" stroke-width="1.6"/>`},
+ taco:{n:"Tacos",fl:["#ff8c1a","#ffe066"],svg:`<path d="M-18 10 A18 18 0 0 1 18 10Z" fill="#f2c14e" ${O}/><path d="M-14 4 Q-8 -8 -2 -4 Q4 -10 10 -3 Q14 -2 14 4" fill="#59b84a" ${O}/><circle cx="-5" cy="1" r="2.5" fill="#e23b2e"/><circle cx="5" cy="0" r="2.5" fill="#e23b2e"/>`},
+ sushi:{n:"Sushi",fl:["#ff9fb2","#ffffff"],svg:`<circle r="16" fill="#1d2a1d" ${O}/><circle r="11" fill="#fbfaf3"/><circle r="5" fill="#ff7a4a"/><circle cx="2" cy="-2" r="2" fill="#7cc35a"/>`},
+ curry:{n:"Indian",fl:["#ffb000","#ff5a1f"],svg:`<path d="M-18 -2 H18 Q16 16 0 16 Q-16 16 -18 -2Z" fill="#c9502a" ${O}/><path d="M-15 -2 Q-8 -9 0 -6 Q8 -10 15 -2Z" fill="#f0a020" ${O}/><path d="M-6 -6 Q0 -16 7 -6" fill="#fffbe8" ${O}/>`},
+ bagel:{n:"Deli",fl:["#e9c08a","#ffffff"],svg:`<circle r="16" fill="#d9a35b" ${O}/><circle r="5" fill="var(--paper)" ${O}/><g fill="#fff8e0"><ellipse cx="-8" cy="-8" rx="1.6" ry="1"/><ellipse cx="6" cy="-10" rx="1.6" ry="1"/><ellipse cx="10" cy="4" rx="1.6" ry="1"/><ellipse cx="-10" cy="6" rx="1.6" ry="1"/><ellipse cx="0" cy="11" rx="1.6" ry="1"/></g>`},
+ gyro:{n:"Halal & Greek",fl:["#ffffff","#3d7bd9"],svg:`<path d="M-14 -14 L14 -14 L2 18 Q0 20 -2 18Z" fill="#f2dcae" ${O}/><path d="M-12 -14 Q-6 -20 0 -14 Q6 -20 12 -14" fill="#9a5a32" ${O}/><path d="M-10 -14 Q-4 -18 2 -13" fill="none" stroke="#59b84a" stroke-width="3"/>`},
+ noodle:{n:"Thai & Viet",fl:["#c86bff","#ffe9ff"],svg:`<path d="M-18 -2 H18 Q16 16 0 16 Q-16 16 -18 -2Z" fill="#2f6fd6" ${O}/><path d="M-14 -2 Q-10 -8 -6 -2 Q-2 -8 2 -2 Q6 -8 10 -2 Q13 -6 15 -2" fill="none" stroke="#f6d36a" stroke-width="3"/><path d="M4 -20 L16 -4M9 -21 L19 -6" stroke="#8a5a2a" stroke-width="2.4" stroke-linecap="round"/>`},
+ jerk:{n:"Caribbean",fl:["#ff3d3d","#ffcf00"],svg:`<path d="M-14 6 Q-20 -10 -4 -14 Q12 -16 10 0 Q8 8 -2 10Z" fill="#8a3a14" ${O}/><path d="M6 6 L14 14" stroke="#fff6e0" stroke-width="5" stroke-linecap="round"/><path d="M6 6 L14 14" stroke="#2a1d14" stroke-width="1" stroke-linecap="round" opacity=".3"/><circle cx="15" cy="12" r="3" fill="#fff6e0" ${O}/><circle cx="12" cy="16" r="3" fill="#fff6e0" ${O}/><path d="M-8 -6 l4 2M-2 -8 l4 2" stroke="#3b9a2e" stroke-width="2"/>`},
+ pierogi:{n:"Polish",fl:["#ffffff","#e23b2e"],svg:`<path d="M-17 6 Q-16 -14 0 -14 Q16 -14 17 6 Q0 12 -17 6Z" fill="#f0c879" ${O}/><g fill="#a7742f"><circle cx="-12" cy="-6" r="1.6"/><circle cx="-6" cy="-11" r="1.6"/><circle cx="1" cy="-13" r="1.6"/><circle cx="8" cy="-11" r="1.6"/><circle cx="13" cy="-5" r="1.6"/></g><path d="M-8 2 Q0 -2 8 2" stroke="#fff3c4" stroke-width="3" fill="none"/>`},
+ arepa:{n:"Latin American",fl:["#ffd23f","#1f4fd1"],svg:`<ellipse cy="6" rx="16" ry="8" fill="#e8b65a" ${O}/><ellipse cy="-1" rx="15" ry="4" fill="#2a1d14"/><ellipse cy="-1" rx="12" ry="2.6" fill="#fbf6ea"/><ellipse cy="-6" rx="16" ry="7" fill="#efc46e" ${O}/>`},
+ bibimbap:{n:"Korean",fl:["#ff2f5a","#ffd23f"],svg:`<path d="M-18 -2 H18 Q16 16 0 16 Q-16 16 -18 -2Z" fill="#3a3a3a" ${O}/><ellipse cy="-2" rx="17" ry="5" fill="#fbf6ea" ${O}/><path d="M-14 -3 h6M-6 -5 h5M8 -4 h6" stroke-width="3.4" stroke="#59b84a"/><path d="M2 -6 h5" stroke-width="3.4" stroke="#ff7a1a"/><circle cx="-1" cy="-3" r="3.2" fill="#ffc21a" stroke="#fff" stroke-width="1.4"/>`}
+};
+const POOP=`<path d="M-14 12 Q-16 4 -8 2 Q-12 -4 -4 -6 Q-6 -12 2 -14 Q2 -8 8 -6 Q14 -4 10 2 Q18 4 14 12Z" fill="#7a4a22" stroke="#3a2210" stroke-width="2" stroke-linejoin="round"/><path d="M-8 4 Q0 6 8 4" stroke="#a36a36" stroke-width="2" fill="none"/>`;
+
+/* ---------- SAMPLE LISTINGS (fictional) ---------- */
+// [name, neighborhood, boro, lat, lon, cuisine, deal, price, days(wk/we/all), hours]
+const RAW=[
+["Golden Pleat Kitchen","Chinatown","mn",40.7158,-73.9970,"dumpling","12 pork & chive dumplings + hot & sour soup",8.50,"all","11am–4pm"],
+["Bowery Noodle Hall","Lower East Side","mn",40.7180,-73.9900,"noodle","Pad see ew or drunken noodles + spring roll + Thai iced tea",13.00,"wk","11:30am–3pm"],
+["Second Ave Slice Co.","East Village","mn",40.7265,-73.9855,"pizza","Two plain slices + a can of soda",7.50,"all","all day"],
+["Curry Hill Thali House","Murray Hill","mn",40.7430,-73.9820,"curry","Veg thali: 2 curries, dal, rice, roti, raita",12.95,"wk","11am–3pm"],
+["Seoul Station 32","Koreatown","mn",40.7477,-73.9869,"bibimbap","Dolsot bibimbap + 4 banchan",14.50,"wk","11am–3pm"],
+["Midtown Cart #47","Midtown","mn",40.7559,-73.9786,"gyro","Chicken over rice, white & hot sauce, free soda",9.00,"wk","10am–4pm"],
+["Ninth Ave Taqueria","Hell's Kitchen","mn",40.7638,-73.9918,"taco","3 tacos al pastor + rice & beans",11.00,"all","11am–4pm"],
+["Maiden Lane Sushi Bar","Financial District","mn",40.7075,-74.0083,"sushi","Two-roll lunch + miso soup + salad",13.95,"wk","11:30am–2:30pm"],
+["Amsterdam Bagel Works","Upper West Side","mn",40.7870,-73.9754,"bagel","Bagel with lox spread + coffee",9.75,"we","7am–2pm"],
+["Lenox Jerk Spot","Harlem","mn",40.8116,-73.9465,"jerk","Small jerk chicken, rice & peas, cabbage",12.00,"all","11am–5pm"],
+["Heights Arepa Bar","Washington Heights","mn",40.8417,-73.9394,"arepa","2 arepas (pabellón + reina) + juice",11.50,"we","10am–4pm"],
+["Sunset Dim Sum Garden","Sunset Park","bk",40.6455,-74.0050,"dumpling","Any 4 dim sum plates + tea",12.00,"we","9am–3pm"],
+["Fifth Ave Tortilleria","Sunset Park","bk",40.6420,-74.0130,"taco","Torta or 3 tacos + agua fresca",10.00,"all","10am–6pm"],
+["Bedford Pie Shop","Williamsburg","bk",40.7150,-73.9580,"pizza","Grandma slice + Caesar salad",11.50,"wk","11am–3pm"],
+["Nassau Pierogi House","Greenpoint","bk",40.7300,-73.9540,"pierogi","8 pierogi (mixed) + kielbasa + beet salad",13.50,"all","11am–8pm"],
+["Nostrand Roti & Jerk","Crown Heights","bk",40.6694,-73.9500,"jerk","Oxtail or jerk chicken lunch box, rice & peas",14.00,"wk","11am–4pm"],
+["Flatbush Curry Corner","Flatbush","bk",40.6409,-73.9554,"curry","Chicken curry roti + side",10.50,"all","11am–7pm"],
+["Bay Ridge Shawarma","Bay Ridge","bk",40.6264,-74.0299,"gyro","Shawarma platter w/ hummus & pita",13.00,"wk","11am–4pm"],
+["Brighton Pelmeni Cafe","Brighton Beach","bk",40.5776,-73.9614,"pierogi","Pelmeni + borscht + bread",12.50,"we","11am–5pm"],
+["Bushwick Banh Mi","Bushwick","bk",40.6944,-73.9213,"noodle","Banh mi + small pho",13.75,"we","12pm–5pm"],
+["Fulton St Bagel Deli","Downtown Brooklyn","bk",40.6930,-73.9866,"bagel","Chopped cheese hero + chips + soda",9.50,"all","24 hours"],
+["Main St Dumpling Den","Flushing","qn",40.7580,-73.8303,"dumpling","Soup dumplings (6) + scallion pancake",10.50,"all","10am–4pm"],
+["Flushing Hand-Pull Noodle","Flushing","qn",40.7605,-73.8270,"noodle","Spicy cumin lamb hand-pulled noodles",11.00,"wk","11am–3pm"],
+["Northern Blvd BBQ","Flushing","qn",40.7630,-73.8160,"bibimbap","Bulgogi lunch box + banchan",14.95,"wk","11am–3pm"],
+["Roosevelt Ave Thali","Jackson Heights","qn",40.7480,-73.8900,"curry","Nepali thali w/ momos",13.00,"all","11am–4pm"],
+["Elmhurst Thai Kitchen","Elmhurst","qn",40.7365,-73.8780,"noodle","Boat noodles + papaya salad",12.00,"we","11am–5pm"],
+["Ditmars Souvlaki","Astoria","qn",40.7744,-73.9135,"gyro","Pork souvlaki pita + fries",10.00,"all","11am–9pm"],
+["Steinway Halal Grill","Astoria","qn",40.7600,-73.9190,"gyro","Lamb over rice + salad",9.50,"wk","10am–5pm"],
+["Corona Plaza Tacos","Corona","qn",40.7450,-73.8603,"taco","4 tacos de suadero + radishes",9.00,"we","10am–6pm"],
+["Liberty Ave Roti Shop","Richmond Hill","qn",40.6958,-73.8272,"curry","Doubles x2 + curry chicken roti",11.00,"all","9am–5pm"],
+["Vernon Blvd Pizza","Long Island City","qn",40.7447,-73.9535,"pizza","Lunch combo: 2 slices + garlic knots",8.75,"wk","11am–4pm"],
+["Queens Blvd Sushi","Sunnyside","qn",40.7433,-73.9196,"sushi","Chirashi lunch bowl + miso",14.75,"wk","11:30am–3pm"],
+["Jamaica Ave Arepas","Jamaica","qn",40.7027,-73.7890,"arepa","Arepa + empanada + coffee",9.25,"all","8am–4pm"],
+["Woodside Bagel Bar","Woodside","qn",40.7454,-73.9067,"bagel","Egg & cheese on everything + OJ",7.25,"we","7am–1pm"]
+];
+const SP=RAW.map((r,i)=>({id:i,name:r[0],nb:r[1],boro:r[2],lat:r[3],lon:r[4],cu:r[5],deal:r[6],price:r[7],days:r[8],hours:r[9]}));
+const BN={mn:"Manhattan",bk:"Brooklyn",qn:"Queens"};
+const DAYS={wk:"Mon–Fri",we:"Sat–Sun",all:"7 days"};
+const $=s=>document.querySelector(s); const NS="http://www.w3.org/2000/svg";
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const money=n=>"$"+n.toFixed(2);
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function xy(lat,lon,b){const e=BORO.ex[b];return [(lon*BORO.kx-BORO.minx)*BORO.s+e[0],(-lat-BORO.miny)*BORO.s+e[1]];}
+
+const MOUSE=`<svg viewBox="0 0 20 32" aria-hidden="true"><defs><filter id="pxm" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" x="-3" y="-3" width="36" height="54"><feFlood x="-2" y="-2" width="1" height="1"/><feComposite x="-3" y="-3" width="3" height="3"/><feTile result="t"/><feComposite in="SourceGraphic" in2="t" operator="in"/><feMorphology operator="dilate" radius="1"/></filter></defs><g transform="scale(.6667)"><g filter="url(#pxm)"><g transform="scale(1.5)"><g stroke="#2a1d14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 1 L7 8M14 1 L13 8" stroke="#9aa0a6" stroke-width="2.6"/><circle cx="6" cy="1.5" r="1.6" fill="#f4a6b8"/><circle cx="14" cy="1.5" r="1.6" fill="#f4a6b8"/><path d="M10 25 Q16 28 12 31" fill="none" stroke="#f4a6b8"/><ellipse cx="10" cy="18" rx="5" ry="7" fill="#9aa0a6"/><circle cx="5" cy="7" r="3" fill="#9aa0a6"/><circle cx="15" cy="7" r="3" fill="#9aa0a6"/><circle cx="5" cy="7" r="1.5" fill="#f4a6b8" stroke="none"/><circle cx="15" cy="7" r="1.5" fill="#f4a6b8" stroke="none"/><circle cx="10" cy="10" r="4.2" fill="#9aa0a6"/><circle cx="8.4" cy="9.6" r=".8" fill="#2a1d14" stroke="none"/><circle cx="11.6" cy="9.6" r=".8" fill="#2a1d14" stroke="none"/><circle cx="10" cy="12.4" r=".9" fill="#f4a6b8" stroke="none"/><path d="M7 25 h2M11 25 h2" stroke-width="2"/></g></g></g></g></svg>`;
+document.querySelectorAll(".mouse").forEach(m=>m.innerHTML=MOUSE);
+/* ---------- MAP ---------- */
+const bg=$("#boros");
+const LAB={mn:[40.79,-74.03],bk:[40.62,-73.955],qn:[40.715,-73.84]};
+for(const b of ["qn","bk","mn"]){ el("path",{d:BORO.paths[b],class:"boro",fill:`var(--${b})`},bg); el("path",{d:BORO.paths[b],fill:"url(#grain)","pointer-events":"none"},bg); }
+for(const b in LAB){ const [x,y]=xy(LAB[b][0],LAB[b][1],b); const t=el("text",{x,y,class:"blab","text-anchor":"middle"},bg); t.textContent=BN[b]; if(b==="mn"){t.setAttribute("transform",`rotate(-62 ${x} ${y})`);} }
+const fg=$("#foods"); const nodes={};
+SP.slice().sort((a,b)=>a.lat<b.lat?1:-1).forEach((s,k)=>{
+  const [x,y]=xy(s.lat,s.lon,s.boro);
+  const g=el("g",{class:"food",transform:`translate(${x.toFixed(1)} ${y.toFixed(1)})`,tabindex:"0",role:"button","aria-label":`${s.name}, ${s.nb}, ${money(s.price)}`},fg);
+  el("ellipse",{class:"shadow",cx:0,cy:22,rx:16,ry:4},g);
+  const bob=el("g",{class:"bob"},g); bob.style.animationDelay=(-(k*0.37)%1.2).toFixed(2)+"s";
+  const sz=el("g",{class:"sz"},bob); const inner=el("g",{transform:"scale(1.25)"},sz); const pxg=el("g",{filter:"url(#pxi)"},inner); pxg.innerHTML=CUI[s.cu].svg;
+  el("circle",{class:"ring",r:28,cy:-4,fill:"none"},sz); el("circle",{r:30,cy:-4,fill:"transparent"},sz);
+  g.addEventListener("click",()=>pick(s.id,g));
+  g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick(s.id,g);}});
+  nodes[s.id]=g;
+});
+
+function sizeIcons(){ const w=$("#map").getBoundingClientRect().width||900; const k=Math.min(2.4,Math.max(1,620/w)); document.querySelectorAll(".food .sz").forEach(g=>g.setAttribute("transform",`scale(${k.toFixed(2)})`)); document.querySelectorAll(".food .shadow").forEach(e=>e.setAttribute("rx",16*k)); }
+new ResizeObserver(sizeIcons).observe($("#map"));
+/* ---------- FILTERS ---------- */
+const cz=$("#cz"); [...new Set(SP.map(s=>s.cu))].sort((a,b)=>CUI[a].n.localeCompare(CUI[b].n)).forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=CUI[c].n;cz.appendChild(o);});
+let VIS=[];
+function apply(){
+  const q=$("#q").value.trim().toLowerCase(), d=document.querySelector('input[name=days]:checked').value, mx=+$("#max").value, c=cz.value, b=$("#bz").value;
+  $("#maxo").textContent=money(mx);
+  VIS=SP.filter(s=>{
+    if(s.price>mx)return false; if(c&&s.cu!==c)return false; if(b&&s.boro!==b)return false;
+    if(d==="wk"&&s.days==="we")return false; if(d==="we"&&s.days==="wk")return false; if(d==="all"&&s.days!=="all")return false;
+    if(q&&!(`${s.name} ${s.nb} ${BN[s.boro]} ${CUI[s.cu].n} ${s.cu} ${s.deal}`.toLowerCase().includes(q)))return false;
+    return true;});
+  const vis=new Set(VIS.map(s=>s.id));
+  SP.forEach(s=>{nodes[s.id].classList.toggle("off",!vis.has(s.id)); nodes[s.id].setAttribute("tabindex",vis.has(s.id)?"0":"-1");});
+  $("#count").textContent=`${VIS.length} special${VIS.length===1?"":"s"} · under ${money(mx)}`;
+  const rows=$("#rows"); rows.innerHTML="";
+  if(!VIS.length){ rows.innerHTML=`<tr><td colspan="7" class="empty">No lunches match. Try a higher price or "Any" days.</td></tr>`; }
+  VIS.slice().sort((a,b)=>a.price-b.price).forEach(s=>{
+    const tr=document.createElement("tr"); tr.tabIndex=0; tr.dataset.id=s.id; if(s.id===CUR)tr.className="sel";
+    tr.innerHTML=`<td><svg class="ic" viewBox="-20 -20 40 40" aria-hidden="true"><g filter="url(#pxi)">${CUI[s.cu].svg}</g></svg></td><td><b></b></td><td></td><td class="deal"></td><td><span class="days ${s.days}">${DAYS[s.days]}</span></td><td>${s.hours}</td><td class="num">${money(s.price)}</td>`;
+    tr.children[1].firstChild.textContent=s.name; tr.children[2].textContent=`${s.nb}, ${BN[s.boro]}`; tr.children[3].textContent=s.deal;
+    const go=()=>pick(s.id,nodes[s.id]); tr.onclick=go; tr.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();go();}};
+    rows.appendChild(tr);
+  });
+  const avg=VIS.length?VIS.reduce((a,s)=>a+s.price,0)/VIS.length:0;
+  $("#lindex").innerHTML=`LUNCH INDEX <b>▼ ${money(avg)}</b> avg · ${VIS.length} deals`;
+}
+["input","change"].forEach(ev=>$("#tools").addEventListener(ev,apply));
+$("#tools").addEventListener("submit",e=>{e.preventDefault();apply();});
+
+/* ---------- RECEIPT ---------- */
+let CUR=null;
+function receipt(id){
+  const s=SP[id], r=$("#rcpt"), i=VIS.findIndex(v=>v.id===id), n=VIS.length;
+  r.hidden=false;
+  r.innerHTML=`<div class="rh"><span>Lunch receipt / ${String(id+1).padStart(2,"0")}</span><button class="x" type="button" aria-label="Close receipt">×</button></div>
+   <h3></h3><div class="nb"></div><p class="deal"></p>
+   <dl><dt>Cuisine</dt><dd>${CUI[s.cu].n}</dd><dt>Days</dt><dd>${DAYS[s.days]}</dd><dt>Hours</dt><dd>${s.hours}</dd><dt>Lunch total</dt><dd class="tot">${money(s.price)}</dd></dl>
+   <div class="bar" aria-hidden="true"></div><div class="thx">*** THANK YOU · TOUGH TIMES ***</div>
+   <div class="pn"><button type="button" data-d="-1">← Previous</button><span>${i<0?"–":i+1} / ${n}</span><button type="button" data-d="1">Next →</button></div>
+   <button class="gel feed" type="button">Feed the patient again</button>`;
+  r.querySelector("h3").textContent=s.name; r.querySelector(".nb").textContent=`${s.nb}, ${BN[s.boro]}`; r.querySelector(".deal").textContent=s.deal;
+  r.querySelector(".x").onclick=()=>{r.hidden=true; mark(null);};
+  r.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{ if(!VIS.length)return; const j=((i<0?0:i)+ +b.dataset.d+VIS.length)%VIS.length; pick(VIS[j].id,nodes[VIS[j].id]); });
+  r.querySelector(".feed").onclick=()=>digest(s,nodes[s.id]);
+}
+function mark(id){ CUR=id; SP.forEach(s=>nodes[s.id].classList.toggle("sel",s.id===id)); document.querySelectorAll("#rows tr").forEach(tr=>tr.classList.toggle("sel",+tr.dataset.id===id)); }
+function pick(id,node){ mark(id); receipt(id); digest(SP[id],node); }
+
+/* ---------- DIGEST-O-TRON ---------- */
+const _B=0;const BODY="M200,126 L200,180 C200,204 208,212 222,214 C262,218 268,262 232,270 C205,276 180,266 176,282 L152,292 C140,296 140,304 152,306 L248,312 C260,314 260,322 248,324 L152,330 C140,332 140,340 152,342 L248,348 C260,350 260,358 248,360 L172,366 C150,370 150,390 170,394 L200,400 L200,432";
+["#tractBed","#tractCav","#tractHi"].forEach(s=>$(s).setAttribute("d",BODY));
+const bodyP=$("#tractCav"), BL=bodyP.getTotalLength();
+const CHUTE={x:200,y0:432,y1:688};
+const mover=$("#mover"); let RUN=0, acq=0;
+try{acq=+localStorage.getItem("tt-acq")||0;}catch(_){}
+$("#acq").textContent=`COLLECTION: ${acq} WORK${acq===1?"":"S"}`;
+const sleep=ms=>new Promise(r=>setTimeout(r,RM?Math.min(ms,60):ms));
+function tween(ms,fn,tok){ if(RM)ms=Math.min(ms,120); return new Promise(res=>{const t0=performance.now();(function f(t){ if(tok!==RUN)return res(false); const u=Math.min(1,(t-t0)/ms); fn(u); if(u<1)requestAnimationFrame(f); else res(true);})(t0);});}
+const ease=u=>u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;
+function say(t){$("#status").textContent="> "+t;}
+function lamp(on){const l=$("#lampOn"); l.setAttribute("fill",on?"url(#lampY)":"url(#lamp)"); l.setAttribute("opacity",on?1:.25); $("#lampGlow").setAttribute("opacity",on?1:0);}
+function inView(e){const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}
+
+async function digest(s,node,auto=false){
+  const tok=++RUN; const cu=CUI[s.cu];
+  mover.innerHTML=""; $("#potPlants").innerHTML=""; $("#ikebana").innerHTML=""; $("#placard").setAttribute("opacity",0); $("#spotlight").setAttribute("opacity",0); $("#soil").setAttribute("fill","#6b4a2b");
+  document.querySelectorAll("#labs g").forEach(g=>g.style.opacity=1);
+  const mouth=$("#mouth");
+  // 1. fly from the map icon into the mouth
+  if(auto){ mouth.setAttribute("ry",12); await sleep(500); if(tok!==RUN)return; } else {
+  if(!inView(mouth)){ $("#digest").scrollIntoView({behavior:RM?"auto":"smooth",block:"start"}); await sleep(650); if(tok!==RUN)return; }
+  say(`Prepping ${s.name}'s ${cu.n.toLowerCase()} special for surgery...`);
+  const fly=$("#fly"); fly.querySelector("g.f")?.remove(); fly.insertAdjacentHTML("beforeend",`<g class="f" filter="url(#pxf)">${cu.svg}</g>`);
+  const a=node&&node.getBoundingClientRect(), m=mouth.getBoundingClientRect();
+  const sx=a&&a.width&&a.bottom>0&&a.top<innerHeight? a.left+a.width/2 : innerWidth/2, sy=a&&a.width&&a.bottom>0&&a.top<innerHeight? a.top+a.height/2 : -30;
+  const ex=m.left+m.width/2, ey=m.top+m.height/2;
+  mouth.setAttribute("ry",12);
+  fly.style.display="block"; lamp(true);
+  const ok=await tween(750,u=>{const e=ease(u); const x=sx+(ex-sx)*e, y=sy+(ey-sy)*e-Math.sin(Math.PI*u)*160; const sc=1-u*.55;
+    fly.style.transform=`translate(${x-22}px,${y-22}px) rotate(${u*720}deg) scale(${sc})`;},tok);
+  fly.style.display="none"; if(!ok)return; }
+  mouth.setAttribute("ry",4); lamp(true); say("CHOMP. Bite accepted. Do not touch the sides!"); setTimeout(()=>lamp(false),220);
+  // 2. travel through the body
+  const g=el("g",{},mover); const inner=el("g",{transform:"scale(.42)"},g); inner.innerHTML=cu.svg;
+  const labs=[...document.querySelectorAll("#labs g")];
+  const msgs=["Down the FOOD CHUTE...","GUT FEELING: positive.","SMALL TALK: 20 feet of it.","SEMI-COLON; almost done."];
+  let li=-1;
+  if(!await tween(3600,u=>{ const p=bodyP.getPointAtLength(BL*u); g.setAttribute("transform",`translate(${p.x} ${p.y}) rotate(${u*900})`);
+     const idx=labs.reduce((acc,l,i)=>u>=+l.dataset.at?i:acc,-1); if(idx!==li){li=idx; if(idx>=0){say(msgs[idx]); lamp(true); setTimeout(()=>lamp(false),160); labs.forEach((l,i)=>l.style.opacity=i===idx?1:.45);} }
+     inner.setAttribute("transform",`scale(${.42-u*.12})`);
+  },tok))return;
+  labs.forEach(l=>l.style.opacity=1);
+  // 3. becomes compost, drops down the chute
+  inner.innerHTML=POOP; inner.setAttribute("transform","scale(.5)"); say("Processing complete. Rerouting to compost.");
+  await sleep(250);
+  if(!await tween(900,u=>{const y=CHUTE.y0+(CHUTE.y1-CHUTE.y0)*u*u; g.setAttribute("transform",`translate(${CHUTE.x} ${y})`);},tok))return;
+  mover.innerHTML=""; $("#soil").setAttribute("fill","#3e2a17"); say("Fertilizer deployed. Growing...");
+  // 4. plants grow in the pot
+  const pp=$("#potPlants"); const stems=[[200,692,170,612],[200,692,206,596],[200,692,236,622]];
+  const parts=stems.map(([x0,y0,x1,y1],i)=>{
+    const d=`M${x0},${y0} Q${(x0+x1)/2+(i-1)*-8},${(y0+y1)/2} ${x1},${y1}`;
+    const p=el("path",{d,fill:"none",stroke:"#3f8f3a","stroke-width":7,"stroke-linecap":"round"},pp); const L=p.getTotalLength(); p.style.strokeDasharray=L; p.style.strokeDashoffset=L;
+    const sg=i===1?1:-1; const lf=el("path",{d:`M${(x0+x1)/2},${(y0+y1)/2+8} q${14*sg},-10 ${22*sg},-4 q${-10*sg},10 ${-22*sg},4z`,fill:"#5cb84f",stroke:"#2c6e2a","stroke-width":1,opacity:0},pp);
+    const fl=flower(pp,x1,y1,cu.fl[i%2],cu.fl[(i+1)%2],0);
+    return {p,L,lf,fl};
+  });
+  if(!await tween(1400,u=>parts.forEach(o=>o.p.style.strokeDashoffset=o.L*(1-u)),tok))return;
+  parts.forEach(o=>o.lf.setAttribute("opacity",1));
+  if(!await tween(600,u=>parts.forEach(o=>o.fl.setAttribute("transform",o.fl.dataset.t+` scale(${u})`)),tok))return;
+  say("Blooms detected. Curators notified."); await sleep(700); if(tok!==RUN)return;
+  // 5. cut & arranged in the museum
+  say("SNIP. Arranging in the moribana style: heaven, earth, human.");
+  if(!await tween(500,u=>pp.setAttribute("opacity",1-u),tok))return;
+  pp.innerHTML=""; pp.setAttribute("opacity",1);
+  $("#spotlight").setAttribute("opacity",1);
+  const ik=$("#ikebana"); const base=[196,924];
+  const arr=[[base,[132,826],"shin"],[base,[262,862],"soe"],[base,[228,900],"hikae"]];
+  const iparts=arr.map(([b,t],i)=>{ const p=el("path",{d:`M${b[0]},${b[1]} Q${(b[0]+t[0])/2+(i===0?18:-10)},${(b[1]+t[1])/2+(i===0?6:-12)} ${t[0]},${t[1]}`,fill:"none",stroke:"#3f6f2a","stroke-width":6,"stroke-linecap":"round"},ik);
+     const L=p.getTotalLength(); p.style.strokeDasharray=L; p.style.strokeDashoffset=L; const f=flower(ik,t[0],t[1],cu.fl[i%2],cu.fl[(i+1)%2],0,i===0?1.1:.85); return {p,L,f};});
+  el("path",{d:"M184 922 q-12 -14 -24 -10 q10 8 24 10z M204 922 q14 -10 26 -6 q-12 8 -26 6z",fill:"#5c9a3e",stroke:"#2c5e22","stroke-width":1},ik);
+  if(!await tween(1200,u=>iparts.forEach(o=>o.p.style.strokeDashoffset=o.L*(1-u)),tok))return;
+  if(!await tween(500,u=>iparts.forEach(o=>o.f.setAttribute("transform",o.f.dataset.t+` scale(${u})`)),tok))return;
+  if(!auto){ acq++; try{localStorage.setItem("tt-acq",acq);}catch(_){} }
+  const no=auto?"000":String(1000+acq).slice(1);
+  $("#pq1").textContent=`Lunch No. ${no}`;
+  $("#pq2").textContent=`${cu.n.length>12?cu.n.split(" ")[0]:cu.n}, soil, time`;
+  $("#pq3").textContent=`Gift of ${s.name.length>12?s.name.slice(0,11)+"…":s.name}`;
+  $("#pq4").textContent=`${s.nb.length>12?s.nb.slice(0,11)+"…":s.nb} ${money(s.price)}`;
+  $("#placard").setAttribute("opacity",1);
+  $("#acq").textContent=`COLLECTION: ${acq} WORK${acq===1?"":"S"}`;
+  say(`Acquired: "Lunch No. ${no}." On view now. Pick another lunch to continue.`);
+}
+function flower(parent,x,y,c1,c2,_,sz=1){ sz*=1.5;
+  const t=`translate(${x} ${y})`; const g=el("g",{transform:t+" scale(0)"},parent); g.dataset.t=t;
+  const r=7*sz; for(let k=0;k<6;k++){const a=k*Math.PI/3; el("ellipse",{cx:(Math.cos(a)*r).toFixed(1),cy:(Math.sin(a)*r).toFixed(1),rx:5.5*sz,ry:4*sz,transform:`rotate(${k*60} ${(Math.cos(a)*r).toFixed(1)} ${(Math.sin(a)*r).toFixed(1)})`,fill:c1,stroke:"#2a1d14","stroke-width":2},g);}
+  el("circle",{r:4*sz,fill:c2,stroke:"#2a1d14","stroke-width":2},g); return g;
+}
+
+/* ---------- START: show a working example ---------- */
+apply();
+const first=SP.find(s=>s.name==="Golden Pleat Kitchen");
+mark(first.id); receipt(first.id); digest(first,nodes[first.id],true);
+</script>
+
+</body>
+</html>
